@@ -1,5 +1,10 @@
 <template>
-  <el-menu router>
+  <el-menu
+    :default-active="activeIndex"
+    router
+    unique-opened
+    @select="handleSelect"
+  >
     <el-submenu index="1">
       <template slot="title">
         <i class="el-icon-grape" />
@@ -95,6 +100,15 @@ export default {
     elSubmenu: Submenu,
     elMenuItem: MenuItem,
   },
+  data() {
+    return {
+      activeIndex: sessionStorage.getItem("activeIndex") || "",
+    };
+  },
+  methods: {
+    handleSelect(index) {
+      sessionStorage.setItem("activeIndex", index);
+    },
+  },
 };
-// 存在的问题刷新后 地址栏路由+页面+侧边导航 不一致，没有保存当前的页面的状态
 </script>

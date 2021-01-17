@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-button :autofocus="true">{{ $t("button.button") }}</el-button>
+      <el-button>{{ $t("button.button") }}</el-button>
       <el-button type="primary">{{ $t("button.primaryButton") }}</el-button>
       <el-button type="success">{{ $t("button.successButton") }}</el-button>
       <el-button type="info">{{ $t("button.infoButton") }}</el-button>
