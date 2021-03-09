@@ -1,10 +1,16 @@
 <template>
   <div class="date">
-    <el-date-picker v-model="valueA" type="date" placeholder="请选择日期" />
+    <el-date-picker
+      v-model="valueA"
+      type="date"
+      placeholder="请选择日期"
+      :editable="false"
+    />
     <el-date-picker
       v-model="valueB"
       type="date"
       placeholder="请选择日期"
+      :editable="false"
       :picker-options="pickerOptions"
     />
   </div>

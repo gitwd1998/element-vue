@@ -4,8 +4,6 @@ import router from './router'
 import store from './store'
 import i18n from './i18n'
 
-import E from "wangeditor";
-Vue.prototype.$E = E;
 
 Vue.config.productionTip = false
 

@@ -1,5 +1,8 @@
 import zh from 'element-ui/lib/locale/lang/zh-CN'
 export default {
+    login: '登录',
+    register: '注册',
+    exit: '退出',
     lang: {
         zh: '中文',
         en: '英文',

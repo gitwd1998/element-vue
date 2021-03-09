@@ -8,6 +8,6 @@ const i18n = new VueI18n({
     locale: sessionStorage.getItem("lang") || 'zh',
     messages: { en, zh, }
 })
-locale.i18n((key, value) => i18n.t(key, value))//为了实现element插件的多语言切换
+locale.i18n((key, value) => i18n.t(key, value))//为了实现element-ui的多语言切换
 
 export default i18n

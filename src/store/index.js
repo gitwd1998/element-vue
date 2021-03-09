@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    test: 18
   },
   mutations: {
+    hh(state, a) {
+      state.test = a
+    }
   },
   actions: {
   },

@@ -1,5 +1,8 @@
 import en from 'element-ui/lib/locale/lang/en'
 export default {
+    login: 'login',
+    register: 'register',
+    exit: 'exit',
     lang: {
         zh: 'Chinese',
         en: 'English',
