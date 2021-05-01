@@ -1,0 +1,58 @@
+[
+    {
+        "title": "基础组件",
+        "index": "1",
+        "icon": "el-icon-grape",
+        "disabled": false,
+        "item": []
+    },
+    {
+        "title": "表单组件",
+        "index": "2",
+        "icon": "el-icon-watermelon",
+        "disabled": false,
+        "item": []
+    },
+    {
+        "title": "数据组件",
+        "index": "3",
+        "icon": "el-icon-cherry",
+        "disabled": false,
+        "item": []
+    },
+    {
+        "title": "提示组件",
+        "index": "4",
+        "icon": "el-icon-apple",
+        "disabled": false,
+        "item": []
+    },
+    {
+        "title": "导航组件",
+        "index": "5",
+        "icon": "el-icon-pear",
+        "disabled": false,
+        "item": []
+    },
+    {
+        "title": "其他组件",
+        "index": "6",
+        "icon": "el-icon-orange",
+        "disabled": false,
+        "item": []
+    },
+    {
+        "title": "第三方",
+        "index": "7",
+        "icon": "el-icon-coffee",
+        "disabled": false,
+        "item": []
+    },
+    {
+        "title": "",
+        "index": "/waiting",
+        "icon": "el-icon-potato-strips",
+        "disabled": false,
+        "item": []
+    }
+]

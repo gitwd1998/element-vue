@@ -9,6 +9,13 @@ module.exports = {
         "libraryName": "element-ui",
         "styleLibraryName": "theme-chalk"
       }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "vxe-table",
+        "style": true // 是否按需加载样式
+      }
     ]
   ]
 }

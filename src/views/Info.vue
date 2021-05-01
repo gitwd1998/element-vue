@@ -16,6 +16,7 @@
     </li>
     <li>
       git指令将暂存区的文件从暂存区撤出，但不会更改文件：git restore --staged
+      文件名
     </li>
     <li>
       git指令依赖远程分支在本地新建分支：git checkout -b 新建本地分支名
