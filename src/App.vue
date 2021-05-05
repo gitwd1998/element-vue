@@ -212,13 +212,9 @@ export default {
     border-bottom: 1px solid #eeeeee;
     justify-content: space-between;
   }
-  .el-container {
-    .el-main {
-      overflow-y: scroll;
-    }
-  }
   .el-main {
-    overflow: unset;
+    overflow-y: scroll;
+    // overflow: unset;
   }
   .el-footer {
     text-align: center;
