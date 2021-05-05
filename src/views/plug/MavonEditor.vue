@@ -1,6 +1,13 @@
 <template>
-  <div class="mavon-editor">
-    <mavon-editor v-model="markdown" toolbars />
+  <div>
+    <mavon-editor
+      v-model="markdown"
+      :toolbars="toolbars"
+      :language="$i18n.locale"
+      @save="handleSave"
+      @imgAdd="handleImgAdd"
+      @imgDel="handleImgDel"
+    />
   </div>
 </template>
 <script>
@@ -49,6 +56,17 @@ export default {
         preview: true, // 预览
       },
     };
+  },
+  methods: {
+    handleSave(value, render) {
+      console.log(value, render);
+    },
+    handleImgAdd(pos, file) {
+      console.log(pos, file);
+    },
+    handleImgDel(filename) {
+      console.log(filename);
+    },
   },
 };
 </script>
