@@ -143,8 +143,7 @@ export default {
     console.log(window.ActiveXObject);
   },
   methods: {
-    handleLang(q, a) {
-      console.log(q, a);
+    handleLang() {
       this.$i18n.locale = this.lang;
       sessionStorage.setItem("lang", this.lang);
     },
