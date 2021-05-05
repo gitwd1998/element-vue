@@ -5,6 +5,7 @@
     <el-button size="mini" @click="handleLogJSON">输出JSON</el-button>
     <el-button size="mini" @click="handleClear">清除内容</el-button>
     <el-button size="mini" @click="handleDestroy">销毁插件</el-button>
+    <el-button size="mini">全局语言：{{ this.$i18n.locale }}</el-button>
     <div class="editor">
       <!-- <strong>富文本编辑器初始内容可以以这种方式设置</strong> -->
     </div>
@@ -12,30 +13,27 @@
 </template>
 <script>
 import { Button } from "element-ui";
-import E from "wangeditor";
 import i18next from "i18next";
+import Editor from "wangeditor";
 export default {
   components: { elButton: Button },
   data() {
     return {
       editor: null,
-      lang: "zh-CN", //en
     };
   },
   mounted() {
-    console.log(this.lang);
-    var editor = new E(".editor");
-    editor.config.height = 500;
+    let editor = new Editor(".editor");
+    // editor.config.height = 500;
+    editor.config.placeholder =
+      "暂时未实现该组件的国际化和全局的国际化同步（该组件的国际化是在该组件创建的时候设置的，暂时还不知道如何跟随全局的语言进行更新）";
+    editor.config.focus = true;
     editor.config.onchange = function (html) {
-      console.log(html);
-    };
-    editor.config.placeholder = "暂时未实现该组件的国际化和全局的国际化同步";
-    editor.config.focus = false;
-    editor.config.onchange = function (newHtml) {
-      console.log("change 之后最新的 html", newHtml);
+      console.log("change 之后最新的 html", html);
     };
     editor.config.onchangeTimeout = 1000;
-    editor.config.lang = this.lang;
+    editor.config.lang =
+      this.$i18n.locale == "zh" ? "zh-CN" : this.$i18n.locale;
     editor.i18next = i18next;
     editor.create();
     this.editor = editor;
