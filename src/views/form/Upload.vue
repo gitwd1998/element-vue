@@ -3,35 +3,32 @@
     <el-upload
       class="el-button"
       action
+      accept=".xlsx"
       :show-file-list="false"
       :auto-upload="false"
       :on-change="handleChange"
     >
-      <template slot="trigger">导入数据1</template>
+      <template slot="trigger">导入数据</template>
     </el-upload>
-    <el-button>导出数据</el-button>
-    <input
-      type="file"
-      ref="file"
-      @change="handleUpload"
-      style="display: inline"
-    />
+    <el-button @click="handleImport">上传图片</el-button>
+    <el-button @click="handleDownload">下载模板</el-button>
+    <input type="file" ref="fileInput" @change="handleUpload" v-show="false" />
+    <p>{{ imgSrc }}</p>
   </div>
 </template>
 <script>
-import { Button, Upload } from "element-ui";
-import { upload } from "@/api";
+import { Button, Message, Upload } from "element-ui";
+import { upload, download } from "@/api";
 import xlsx from "xlsx";
 export default {
   components: { elUpload: Upload, elButton: Button },
+  data() {
+    return {
+      imgSrc: "",
+    };
+  },
   methods: {
-    async handleChange({ raw }) {
-      let res = await this.upload(raw);
-      res = xlsx.read(res, { type: "binary" });
-      res = xlsx.utils.sheet_to_json(res.Sheets[res.SheetNames[0]]);
-      console.log(res);
-    },
-    upload(file) {
+    fileReader(file) {
       return new Promise((resolve) => {
         let reader = new FileReader();
         reader.readAsBinaryString(file);
@@ -40,11 +37,40 @@ export default {
         };
       });
     },
+    async handleChange({ raw }) {
+      let res = await this.fileReader(raw);
+      res = xlsx.read(res, { type: "binary" });
+      res = xlsx.utils.sheet_to_json(res.Sheets[res.SheetNames[0]]);
+      console.log(res);
+    },
+    handleImport() {
+      this.$refs.fileInput.click();
+    },
     async handleUpload(e) {
       let file = e.target.files[0];
       let formData = new FormData();
       formData.append("file", file);
-      await upload(formData, { name: "张三", age: 18, sex: "男" });
+      let { data } = await upload(formData, {
+        name: "张三",
+        age: 18,
+        sex: "男",
+      });
+      if (Number(data.code) === 0) {
+        Message.success(data.msg);
+        this.imgSrc = data.data[0].url;
+      } else {
+        Message.error(data.msg);
+      }
+    },
+    async handleDownload() {
+      let { data } = await download();
+      const blob = new Blob([data], { type: "application/vnd.ms-excel" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "下载模板.xlsx";
+      a.click();
+      window.URL.revokeObjectURL(blob);
     },
   },
 };

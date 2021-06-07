@@ -43,3 +43,13 @@ export function upload(data, params) {
 		params,
 	})
 }
+// 下载
+export function download(data, params) {
+	return request({
+		url: '/download',
+		method: 'get',
+		responseType: 'blob',
+		data,
+		params,
+	})
+}
