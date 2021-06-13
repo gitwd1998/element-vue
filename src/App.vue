@@ -1,26 +1,23 @@
 <template>
   <el-container class="app">
     <el-header>
-      <div class="left">
-        <el-img :src="require('@/assets/img/element-ui.svg')" />
-      </div>
-      <div class="right">
-        <el-button-group>
-          <el-button type="primary" size="mini" @click="loginVisible = true">{{
-            $t("login")
-          }}</el-button>
-          <el-button type="danger" size="mini" @click="handleRegister">{{
-            $t("register")
-          }}</el-button>
-        </el-button-group>
-        <el-button type="info" size="mini" @click="handleExit">{{
-          $t("exit")
+      <el-img :src="require('@/assets/img/element-ui.svg')" />
+      <el-radio-group v-model="lang" @change="chnageLang">
+        <el-radio-button label="zh">{{ $t("lang.zh") }}</el-radio-button>
+        <el-radio-button label="en">{{ $t("lang.en") }}</el-radio-button>
+      </el-radio-group>
+      <el-button type="info" @click="handleExit" v-if="user">{{
+        $t("exit")
+      }}</el-button>
+      <el-button-group v-else>
+        <el-button type="primary" @click="loginVisible = true">{{
+          $t("login")
         }}</el-button>
-        <el-radio-group v-model="lang" size="mini" @change="handleLang">
-          <el-radio-button label="zh">{{ $t("lang.zh") }}</el-radio-button>
-          <el-radio-button label="en">{{ $t("lang.en") }}</el-radio-button>
-        </el-radio-group>
-      </div>
+        <el-button type="danger" @click="handleRegister">{{
+          $t("register")
+        }}</el-button>
+      </el-button-group>
+      <el-button round v-if="user">{{ user }}</el-button>
     </el-header>
     <el-container>
       <el-aside width="auto"><component-aside /></el-aside>
@@ -38,20 +35,20 @@
       width="50%"
       :before-close="handleClose"
     >
-      <el-form ref="login" :model="loginForm" :rules="loginRule">
+      <el-form ref="login" :model="loginFormData" :rules="loginFormRule">
         <el-form-item label="用户名" prop="user" label-width="80px">
-          <el-input v-model="loginForm.user" />
+          <el-input v-model="loginFormData.user" />
         </el-form-item>
         <el-form-item label="密码" prop="pass" label-width="80px">
-          <el-input type="pass" v-model="loginForm.pass" />
+          <el-input type="pass" v-model="loginFormData.pass" />
         </el-form-item>
         <el-form-item label="验证码" prop="captchatext" label-width="80px">
-          <el-input v-model="loginForm.captchatext">
-            <div slot="append" v-html="captchaImg" @click="handleCaptcha"></div>
+          <el-input v-model="loginFormData.captchatext">
+            <div slot="append" v-html="captchaImg" @click="getCaptcha"></div>
           </el-input>
         </el-form-item>
         <el-form-item label="记住密码" prop="remember" label-width="80px">
-          <el-switch v-model="loginForm.remember" />
+          <el-switch v-model="loginFormData.remember" />
         </el-form-item>
       </el-form>
       <template slot="footer">
@@ -107,15 +104,15 @@ export default {
   },
   data() {
     return {
-      lang: sessionStorage.getItem("lang") || "zh",
+      lang: this.$store.getters.getLang,
       loginVisible: false,
-      loginForm: {
+      loginFormData: {
         user: "",
         pass: "",
         captchatext: "",
         remember: false,
       },
-      loginRule: {
+      loginFormRule: {
         user: [{ required: true, message: "请输入用户名", trigger: "blur" }],
         pass: [{ required: true, message: "请输入密码", trigger: "blur" }],
         captchatext: [
@@ -125,27 +122,37 @@ export default {
       captchaImg: "",
     };
   },
+  computed: {
+    user() {
+      return this.$store.getters.getUser;
+    },
+    pass() {
+      return this.$store.getters.getPass;
+    },
+    token() {
+      return this.$store.getters.getToken;
+    },
+    phone() {
+      return this.$store.getters.getPhone;
+    },
+    timestamp() {
+      return this.$store.getters.getTimestam;
+    },
+  },
   watch: {
     loginVisible() {
-      if (this.loginVisible) this.handleCaptcha();
+      if (this.loginVisible) this.getCaptcha();
     },
   },
   created() {
-    console.log(this.$store);
-    setTimeout(() => {
-      this.$store.commit("hh", 5555);
-    }, 2000);
     this.$nextTick(() => {
       this.calcMainHeigth();
     });
   },
-  mounted() {
-    console.log(window.ActiveXObject);
-  },
   methods: {
-    handleLang() {
+    chnageLang() {
       this.$i18n.locale = this.lang;
-      sessionStorage.setItem("lang", this.lang);
+      localStorage.setItem("lang", this.lang);
     },
     calcMainHeigth() {
       let container = getDomHeight(".app");
@@ -162,7 +169,7 @@ export default {
         .then(() => {
           done();
           this.$refs.login.resetFields();
-          Message("取消登录操作");
+          Message.success("取消登录操作");
         })
         .catch(() => {});
     },
@@ -173,7 +180,7 @@ export default {
         .then(() => {
           this.loginVisible = false;
           this.$refs.login.resetFields();
-          Message("取消登录操作");
+          Message.success("取消登录操作");
         })
         .catch(() => {});
     },
@@ -181,21 +188,49 @@ export default {
       this.$refs.login.validate(async (valid, rules) => {
         if (valid) {
           this.loginVisible = false;
-          let { data } = await login(this.loginForm);
+          let { data } = await login(this.loginFormData);
           this.$refs.login.resetFields();
-          Message.info(data.message);
+          if (Number(data.code) === 0) {
+            let { user, pass, phone, timestamp, token } = data;
+            localStorage.setItem("user", user);
+            localStorage.setItem("pass", pass);
+            localStorage.setItem("token", token);
+            localStorage.setItem("phone", phone);
+            localStorage.setItem("timestamp", timestamp);
+            this.$store.commit("setUser", user);
+            this.$store.commit("setPass", pass);
+            this.$store.commit("setToken", token);
+            this.$store.commit("setPhone", phone);
+            this.$store.commit("setTimestamp", timestamp);
+            Message.success(data.msg);
+          } else {
+            Message.error(data.msg);
+          }
         } else {
           for (let rule in rules) {
             Message.warning(rules[rule][0].message);
             break;
           }
-          return false;
         }
       });
     },
     handleRegister() {},
-    handleExit() {},
-    async handleCaptcha() {
+    handleExit() {
+      MessageBox.confirm("确定退出登录吗？", "提示", {
+        type: "info",
+      })
+        .then(() => {
+          Message.success("已退出当前用户");
+          localStorage.clear();
+          this.$store.commit("setUser", "");
+          this.$store.commit("setPass", "");
+          this.$store.commit("setToken", "");
+          this.$store.commit("setPhone", "");
+          this.$store.commit("setTimestamp", "");
+        })
+        .catch(() => {});
+    },
+    async getCaptcha() {
       let { data } = await captcha();
       this.captchaImg = data;
     },
