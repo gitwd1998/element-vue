@@ -173,8 +173,13 @@
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center">
-          <template slot-scope="{ row }">
-            <el-button @click="handleDelete(row)">删除</el-button>
+          <template slot="header">
+            <el-button @click="handleAddColumn">添加</el-button>
+          </template>
+          <template slot-scope="scope">
+            <el-button type="danger" @click="handleDeleteColumn(scope)"
+              >删除</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -192,7 +197,21 @@
         <el-button slot="trigger">选取文件</el-button>
       </el-upload>
     </el-form-item>
+    <el-form-item
+      label="动态增减表单"
+      v-for="(domain, i) in formData.domains"
+      :key="i"
+      :prop="'domains.' + i + '.value'"
+      :rules="rules.domain"
+    >
+      <el-input v-model="domain.value">
+        <template slot="append">
+          <el-button @click="handleDeleteDomain(i)">删除</el-button>
+        </template>
+      </el-input>
+    </el-form-item>
     <el-form-item>
+      <el-button type="primary" @click="handleAddDomain">增加</el-button>
       <el-button type="success" @click="handleSubmit">提交</el-button>
       <el-button type="danger" @click="handleReset">重置</el-button>
     </el-form-item>
@@ -278,12 +297,10 @@ export default {
         checkbox: [1],
         radio: 1,
         textarea: "",
-        table: [
-          { name: "", sex: "", age: 10 },
-          { name: "", sex: "", age: 10 },
-        ],
+        table: [{ name: "", sex: "", age: 10 }],
         fileList: [],
         upload: null,
+        domains: [{ value: "" }],
       },
       rules: {
         input: [
@@ -311,6 +328,7 @@ export default {
         name: [{ required: true, message: "请输入性别", trigger: "blur" }],
         sex: [{ required: true, message: "请输入性别", trigger: "blur" }],
         age: [{ required: true, message: "请输入年龄", trigger: "blur" }],
+        domain: [{ required: true, message: "请输入", trigger: "blur" }],
       },
     };
   },
@@ -324,11 +342,26 @@ export default {
       this.checkAll = len === 3;
       this.isIndeterminate = len > 0 && len < 3;
     },
-    handleDelete(row) {
-      console.log(row);
+    handleAddColumn() {
+      this.formData.table.push({ name: "", sex: "", age: 10 });
+    },
+    handleDeleteColumn(scope) {
+      if (this.formData.table.length === 1) {
+        return Message.warning("至少保留一项");
+      }
+      this.formData.table.splice(scope.$index, 1);
     },
     handleChangeFile(file, fileList) {
       this.formData.fileList = fileList;
+    },
+    handleDeleteDomain(i) {
+      if (this.formData.domains.length === 1) {
+        return Message.warning("至少保留一项");
+      }
+      this.formData.domains.splice(i, 1);
+    },
+    handleAddDomain() {
+      this.formData.domains.push({ value: "" });
     },
     handleSubmit() {
       this.$refs.form.validate(async (valid, rules) => {
@@ -338,11 +371,7 @@ export default {
             this.formData.upload.append(v.name, v.raw);
           });
           let { data } = await upload(this.formData.upload);
-          if (Number(data.code) === 0) {
-            this.formData.fileList = data.data;
-          } else {
-            Message.error(data.msg);
-          }
+          if (Number(data.code) === 0) this.formData.fileList = data.data;
           console.log(this.formData);
         } else {
           console.warn(this.formData, valid, rules);
