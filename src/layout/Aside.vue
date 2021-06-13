@@ -70,9 +70,10 @@
       <template slot="title">
         <i class="el-icon-coffee" /><span>第三方</span>
       </template>
-      <el-menu-item index="/editor">富文本编辑器</el-menu-item>
-      <el-menu-item index="/mavonEditor">Markdown编辑器</el-menu-item>
-      <el-menu-item index="/vxeTable">表格</el-menu-item>
+      <el-menu-item index="/wangEditor">wangeditor</el-menu-item>
+      <el-menu-item index="/mavonEditor">mavon-editor</el-menu-item>
+      <el-menu-item index="/vxeTable">vxe-table</el-menu-item>
+      <el-menu-item index="/pdf">vue-pdf</el-menu-item>
     </el-submenu>
     <el-menu-item index="/waiting" disabled>
       <i class="el-icon-potato-strips"></i>
