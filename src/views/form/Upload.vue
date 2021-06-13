@@ -11,7 +11,9 @@
       <template slot="trigger">导入数据</template>
     </el-upload>
     <el-button @click="handleImport">上传图片</el-button>
-    <el-button @click="handleDownload">下载模板</el-button>
+    <el-button @click="downloadWord">下载word文档</el-button>
+    <el-button>下载excel文档</el-button>
+    <el-button>下载pdf文档</el-button>
     <input type="file" ref="fileInput" @change="handleUpload" v-show="false" />
     <p>{{ imgSrc }}</p>
   </div>
@@ -58,17 +60,16 @@ export default {
       if (Number(data.code) === 0) {
         Message.success(data.msg);
         this.imgSrc = data.data[0].url;
-      } else {
-        Message.error(data.msg);
       }
     },
-    async handleDownload() {
+    async downloadWord() {
       let { data } = await download();
-      const blob = new Blob([data], { type: "application/vnd.ms-excel" });
+      const blob = new Blob([data], { type: "application/vnd.ms-excel" }); //导出 xlsx
+      // const blob = new Blob([data], { type: "application/msword" }); // 导出 word
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "下载模板.xlsx";
+      a.download = "模板.xlsx ";
       a.click();
       window.URL.revokeObjectURL(blob);
     },
