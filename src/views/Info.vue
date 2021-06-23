@@ -8,15 +8,16 @@
     <li>git指令切换分支：git checkout 分支名</li>
     <li>git指令合并分支：git merge 分支名</li>
     <li>git指令查看分支：git branch</li>
-    <li>git指令删除本地分支: git branch -d 分支名</li>
+    <li>git指令删除本地分支: git branch -D 分支名</li>
     <li>git指令删除远端分支: git push origin --delete 分支名</li>
-    <li>
-      git指令取消commit：git reset --soft
-      "HEAD^"(注释：^表示返回上一版本，以此类推)
-    </li>
+    <li>git指令撤销更改：git reset --hard HEAD</li>
     <li>
       git指令将暂存区的文件从暂存区撤出，但不会更改文件：git restore --staged
       文件名
+    </li>
+    <li>
+      git指令取消commit：git reset --soft
+      "HEAD^"(注释：^表示返回上一版本，以此类推)
     </li>
     <li>
       git指令依赖远程分支在本地新建分支：git checkout -b 新建本地分支名
@@ -56,11 +57,19 @@
       会导致处于多级导航的页面刷新时和跳转时报错（Uncaught SyntaxError:
       Unexpected token '尖括号'）
     </li>
+    <li>
+      BUG: 侧边导航折叠起来的时候, 如果子菜单过多会导致超出浏览器窗口而隐藏.
+    </li>
+    <li>在vant里卖弄写个推拉窗试试</li>
+    <li>带表单验证的表格没法显示验证提示信息</li>
+    <li>下载模板打开失败</li>
+    <li>node中的静态资源管理路径</li>
+    <li>当跳转页面无权限时重定向会报错</li>
   </ul>
 </template>
 <script>
-import x from "vuex";
-console.log(x);
+import vuex, { createNamespacedHelpers } from "vuex";
+console.log(vuex, createNamespacedHelpers());
 export default {
   methods: {},
 };
