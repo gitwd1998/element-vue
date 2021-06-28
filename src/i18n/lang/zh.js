@@ -1,9 +1,22 @@
 import zh from 'element-ui/lib/locale/lang/zh-CN'
 export default {
+    user: '用户',
     login: '登录',
     register: '注册',
     exit: '退出',
+    username: '用户名',
+    password: '密码',
+    verification: '验证码',
+    phone: '手机号码',
+    remember: '记住密码',
+    rules: {
+        username: '请输入用户名',
+        password: '请输入密码',
+        verification: '请输入验证码',
+        phone: '请输入手机号码',
+    },
     lang: {
+        lang: '语言',
         zh: '中文',
         en: '英文',
     },

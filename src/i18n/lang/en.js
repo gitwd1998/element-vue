@@ -1,9 +1,22 @@
 import en from 'element-ui/lib/locale/lang/en'
 export default {
-    login: 'login',
-    register: 'register',
-    exit: 'exit',
+    user: 'User',
+    login: 'Login',
+    register: 'Register',
+    exit: 'Exit',
+    username: 'user name',
+    password: 'password',
+    verification: 'verification code',
+    phone: 'phone number',
+    remember: 'remember password',
+    rules: {
+        username: 'Please enter the user name',
+        password: 'Please enter the password',
+        verification: 'Please enter the verification code',
+        phone: 'Please enter the phone number',
+    },
     lang: {
+        lang: 'Language',
         zh: 'Chinese',
         en: 'English',
     },
