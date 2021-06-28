@@ -24,21 +24,23 @@
       origin/远程依赖分支名
     </li>
     <li>git暂存时或者恢复暂存时如果有修改的文件需要添加修改（git add .）</li>
+    <li>git指令暂存所有未提交的: git stash; 可用git stash pop恢复</li>
     <li>git指令暂存: git stash save "暂存标识名"</li>
     <li>git指令查看暂存记录: git stash list</li>
     <li>
-      git指令恢复指定的暂存工作,
-      暂存记录保存在list内,需要通过list索引index取出恢复: git stash pop
-      stash@{index}
+      git指令恢复指定的暂存工作, 暂存记录保存在list内,
+      需要通过list索引index取出恢复, 恢复后, 暂存区域会删除当前的记录: git stash
+      pop stash@{index}
     </li>
     <li>
-      git指令恢复指定的暂存工作,
-      暂存记录保存在list内,需要通过list索引index取出恢复: git stash apply
-      stash@{index}
+      git指令恢复指定的暂存工作, 暂存记录保存在list内,
+      需要通过list索引index取出恢复, 恢复后, 暂存区域会保留当前的记录: git stash
+      apply stash@{index}
     </li>
     <li>git指令查看暂存记录: git stash list</li>
     <li>git指令删除指定暂存：git stash drop stash@{index}</li>
     <li>git指令删除所有暂存：git stash clear</li>
+    <li>git指令比较两个分支: git diff 分支名1 分支名2 比较两个分支</li>
     <li>
       侧边导航在路由模式时index属性可以当作router属性用，index的之前面可以加 /
       也可以不加，加上可以配合:default-active="$route.path"使用实现页面刷新后地址栏和导航栏的统一
