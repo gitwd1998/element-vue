@@ -162,4 +162,14 @@ console.log('hello world')
 
 ------
 
+### 注册接口返回信息
+
+| code | msg |
+| - | :- |
+| 0 | 用户名已存在 |
+| 1 | 注册成功 |
+
+------
+
+
 [1]: http://www.baidu.com
