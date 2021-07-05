@@ -6,79 +6,58 @@
     :collapse="collapse"
     class="el-menu-vertical-demo"
   >
-    <el-submenu index="1">
-      <template slot="title">
-        <i class="el-icon-grape" /><span>基础组件</span>
-      </template>
-      <el-menu-item index="/layout">Layout 布局</el-menu-item>
-      <el-menu-item index="/container">container 容器</el-menu-item>
-      <el-menu-item index="/color">Color 色彩</el-menu-item>
-      <el-menu-item index="/typography">Typography 字体</el-menu-item>
-      <el-menu-item index="/border">Border 边框</el-menu-item>
-      <el-menu-item index="/icon">Icon 图标</el-menu-item>
-      <el-menu-item index="/button">Button 按钮</el-menu-item>
-      <el-menu-item index="/link">Link 文字链接</el-menu-item>
-    </el-submenu>
-    <el-submenu index="2">
-      <template slot="title">
-        <i class="el-icon-watermelon" /><span>表单组件</span>
-      </template>
-      <el-menu-item index="/radio">Radio 单选框</el-menu-item>
-      <el-menu-item index="/checkbox">Checkbox 多选框</el-menu-item>
-      <el-menu-item index="/input">Input 输入框</el-menu-item>
-      <el-menu-item index="/inputNumber">InputNumber 计数器</el-menu-item>
-      <el-menu-item index="/select">Select 选择器</el-menu-item>
-      <el-menu-item index="/cascader">Cascader 级联选择器</el-menu-item>
-      <el-menu-item index="/switch">Switch 开关</el-menu-item>
-      <el-menu-item index="/slider">Slider 滑块</el-menu-item>
-      <el-menu-item index="/timePicker">TimePicker 时间选择器</el-menu-item>
-      <el-menu-item index="/datePicker">DatePicker 日期选择器</el-menu-item>
-      <el-menu-item index="/dataTimePicker"
-        >DateTimePicker 日期时间选择器</el-menu-item
+    <template v-for="nav in navList">
+      <el-submenu
+        v-if="nav.item.length"
+        :index="nav.index"
+        :key="nav.index"
+        :disabled="nav.disabled"
       >
-      <el-menu-item index="/upload">Upload 上传</el-menu-item>
-      <el-menu-item index="/rate">Rate 评分</el-menu-item>
-      <el-menu-item index="/colorPicker">ColorPicker 颜色选择器</el-menu-item>
-      <el-menu-item index="/transfer">Transfer 穿梭框</el-menu-item>
-      <el-menu-item index="/form">Form 表单</el-menu-item>
-    </el-submenu>
-    <el-submenu index="3">
-      <template slot="title">
-        <i class="el-icon-cherry" /><span slot="title">数据组件</span>
-      </template>
-      <el-menu-item index="/table">Table 表格</el-menu-item>
-    </el-submenu>
-    <el-submenu index="4">
-      <template slot="title">
-        <i class="el-icon-apple" /><span slot="title">提示组件</span>
-      </template>
-      <el-menu-item index="/alert">Alert 警告</el-menu-item>
-    </el-submenu>
-    <el-submenu index="5">
-      <template slot="title">
-        <i class="el-icon-pear" /><span>导航组件</span>
-      </template>
-      <el-menu-item index="/navMenu">NavMenu 导航菜单</el-menu-item>
-    </el-submenu>
-    <el-submenu index="6">
-      <template slot="title">
-        <i class="el-icon-orange" /><span>其他组件</span>
-      </template>
-      <el-menu-item index="/calendar">Calendar 走马灯</el-menu-item>
-    </el-submenu>
-    <el-submenu index="7">
-      <template slot="title">
-        <i class="el-icon-coffee" /><span>第三方</span>
-      </template>
-      <el-menu-item index="/wangEditor">wangeditor</el-menu-item>
-      <el-menu-item index="/mavonEditor">mavon-editor</el-menu-item>
-      <el-menu-item index="/vxeTable">vxe-table</el-menu-item>
-      <el-menu-item index="/pdf">vue-pdf</el-menu-item>
-    </el-submenu>
-    <el-menu-item index="/waiting" disabled>
-      <i class="el-icon-potato-strips"></i>
-      <span>带开放</span>
-    </el-menu-item>
+        <template slot="title">
+          <i :class="nav.icon" /><span>{{ nav.title }} {{ nav.name }}</span>
+        </template>
+        <template v-for="item in nav.item">
+          <el-submenu
+            v-if="item.item.length"
+            :key="item.index"
+            :index="item.index"
+            :disabled="item.disabled"
+          >
+            <template slot="title">
+              <i :class="item.icon" />
+              <span>{{ item.title }} {{ item.name }}</span>
+            </template>
+            <el-menu-item
+              v-for="iItem in item.item"
+              :key="iItem.index"
+              :index="iItem.index"
+              :disabled="iItem.disabled"
+            >
+              <i :class="iItem.icon"></i>
+              <span>{{ iItem.title }} {{ iItem.name }}</span>
+            </el-menu-item>
+          </el-submenu>
+          <el-menu-item
+            v-else
+            :key="item.index"
+            :index="item.index"
+            :disabled="item.disabled"
+          >
+            <i :class="item.icon"></i>
+            <span>{{ item.title }} {{ item.name }}</span>
+          </el-menu-item>
+        </template>
+      </el-submenu>
+      <el-menu-item
+        v-else
+        :key="nav.index"
+        :index="nav.index"
+        :disabled="nav.disabled"
+      >
+        <i :class="nav.icon"></i>
+        <span>{{ nav.title }} {{ nav.name }}</span>
+      </el-menu-item>
+    </template>
     <li class="el-menu-item right" @click="handleCollapse">
       <i :class="collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></i>
     </li>
@@ -86,11 +65,13 @@
 </template>
 <script>
 import { Menu, MenuItem, Submenu } from "element-ui";
+import navList from "@/assets/json/navList.json";
 export default {
   components: { elMenu: Menu, elSubmenu: Submenu, elMenuItem: MenuItem },
   data() {
     return {
       collapse: false,
+      navList,
     };
   },
   methods: {

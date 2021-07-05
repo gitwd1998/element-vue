@@ -88,9 +88,6 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.box {
-  height: 1000px;
-}
 .el-row {
   .el-col {
     margin: 10px 0;

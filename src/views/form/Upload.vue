@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <el-upload
       class="el-button"
       action

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <el-calendar v-model="value"></el-calendar>
   </div>
 </template>

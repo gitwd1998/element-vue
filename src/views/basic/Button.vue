@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <el-row>
       <el-button>{{ $t("button.button") }}</el-button>
       <el-button type="primary">{{ $t("button.primaryButton") }}</el-button>

@@ -1,7 +1,9 @@
 <template>
-  <el-dialog :visible.sync="showPDF">
-    <!-- <pdf src="../../assets/pdf/简历.pdf" :page="1"></pdf> -->
-  </el-dialog>
+  <div class="box">
+    <el-dialog :visible.sync="showPDF">
+      <!-- <pdf src="../../assets/pdf/简历.pdf" :page="1"></pdf> -->
+    </el-dialog>
+  </div>
 </template>
 <script>
 import { Dialog } from "element-ui";

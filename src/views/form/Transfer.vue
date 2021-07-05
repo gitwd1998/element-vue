@@ -1,16 +1,18 @@
 <template>
-  <el-transfer
-    filterable
-    v-model="value"
-    :data="data"
-    :left-default-checked="[2, 3]"
-    :right-default-checked="[1]"
-    :titles="['待添加的', '已添加的']"
-    :button-texts="['删除', '添加']"
-  >
-    <el-button slot="left-footer" size="small">操作</el-button>
-    <el-button slot="right-footer" size="small">操作</el-button>
-  </el-transfer>
+  <div class="box">
+    <el-transfer
+      filterable
+      v-model="value"
+      :data="data"
+      :left-default-checked="[2, 3]"
+      :right-default-checked="[1]"
+      :titles="['待添加的', '已添加的']"
+      :button-texts="['删除', '添加']"
+    >
+      <el-button slot="left-footer" size="small">操作</el-button>
+      <el-button slot="right-footer" size="small">操作</el-button>
+    </el-transfer>
+  </div>
 </template>
 
 <script>

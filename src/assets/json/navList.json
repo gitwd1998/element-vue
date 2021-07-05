@@ -1,0 +1,325 @@
+[
+    {
+        "title": "基础组件",
+        "name": "Base",
+        "index": "1",
+        "icon": "el-icon-grape",
+        "disabled": false,
+        "item": [
+            {
+                "title": "布局",
+                "name": "Layout",
+                "index": "/layout",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "容器",
+                "name": "container",
+                "index": "/container",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "色彩",
+                "name": "Color",
+                "index": "/color",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "字体",
+                "name": "Typography",
+                "index": "/typography",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "边框",
+                "name": "Border",
+                "index": "/border",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "图标",
+                "name": "Icon",
+                "index": "/icon",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "按钮",
+                "name": "Button",
+                "index": "/button",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "文字链接",
+                "name": "Link",
+                "index": "/link",
+                "disabled": true,
+                "item": []
+            }
+        ]
+    },
+    {
+        "title": "表单组件",
+        "name": "Form",
+        "index": "2",
+        "icon": "el-icon-watermelon",
+        "disabled": false,
+        "item": [
+            {
+                "title": "单选框",
+                "name": "Radio",
+                "index": "/radio",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "多选框",
+                "name": "Checkbox",
+                "index": "/checkbox",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "输入框",
+                "name": "Input",
+                "index": "/input",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "计数器",
+                "name": "InputNumber",
+                "index": "/inputNumber",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "选择器",
+                "name": "Select",
+                "index": "/select",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "级联选择器",
+                "name": "Cascader",
+                "index": "/cascader",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "开关",
+                "name": "Switch",
+                "index": "/switch",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "滑块",
+                "name": "Slider",
+                "index": "/slider",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "时间选择器",
+                "name": "TimePicker",
+                "index": "/timePicker",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "日期选择器",
+                "name": "DatePicker",
+                "index": "/datePicker",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "日期时间选择器",
+                "name": "DateTimePicker",
+                "index": "/dataTimePicker",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "上传",
+                "name": "Upload",
+                "index": "/upload",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "评分",
+                "name": "Rate",
+                "index": "/rate",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "颜色选择器",
+                "name": "ColorPicker",
+                "index": "/colorPicker",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "穿梭框",
+                "name": "Transfer",
+                "index": "/transfer",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "表单",
+                "name": "Form",
+                "index": "/form",
+                "disabled": false,
+                "item": []
+            }
+        ]
+    },
+    {
+        "title": "数据组件",
+        "name": "Data",
+        "index": "3",
+        "icon": "el-icon-cherry",
+        "disabled": false,
+        "item": [
+            {
+                "title": "表格",
+                "name": "Table",
+                "index": "/table",
+                "disabled": false,
+                "item": []
+            }
+        ]
+    },
+    {
+        "title": "提示组件",
+        "name": "Notice",
+        "index": "4",
+        "icon": "el-icon-apple",
+        "disabled": false,
+        "item": [
+            {
+                "title": "警告",
+                "name": "Alert",
+                "index": "/alert",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "加载",
+                "name": "Loading",
+                "index": "/loading",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "消息提示",
+                "name": "Mseeage",
+                "index": "/message",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "弹窗",
+                "name": "MessageBox",
+                "index": "/messageBox",
+                "disabled": true,
+                "item": []
+            },
+            {
+                "title": "通知",
+                "name": "Notification",
+                "index": "/notification",
+                "disabled": true,
+                "item": []
+            }
+        ]
+    },
+    {
+        "title": "导航组件",
+        "name": "Navigation",
+        "index": "5",
+        "icon": "el-icon-pear",
+        "disabled": false,
+        "item": [
+            {
+                "title": "导航菜单",
+                "name": "NavMenu",
+                "index": "/navMenu",
+                "disabled": false,
+                "item": []
+            }
+        ]
+    },
+    {
+        "title": "其他组件",
+        "name": "Others",
+        "index": "6",
+        "icon": "el-icon-orange",
+        "disabled": false,
+        "item": [
+            {
+                "title": "走马灯",
+                "name": "Calendar",
+                "index": "/calendar",
+                "disabled": false,
+                "item": []
+            }
+        ]
+    },
+    {
+        "title": "第三方",
+        "name": "Plug",
+        "index": "7",
+        "icon": "el-icon-coffee",
+        "disabled": false,
+        "item": [
+            {
+                "title": "wangeditor",
+                "name": "",
+                "index": "/wangEditor",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "mavon-editor",
+                "name": "",
+                "index": "/mavonEditor",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "vxe-table",
+                "name": "",
+                "index": "/vxeTable",
+                "disabled": false,
+                "item": []
+            },
+            {
+                "title": "vue-pdf",
+                "name": "",
+                "index": "/pdf",
+                "disabled": false,
+                "item": []
+            }
+        ]
+    },
+    {
+        "title": "待开放",
+        "name": "Waiting",
+        "index": "/waiting",
+        "icon": "el-icon-potato-strips",
+        "disabled": true,
+        "item": []
+    }
+]

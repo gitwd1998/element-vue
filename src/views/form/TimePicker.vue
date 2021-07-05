@@ -1,5 +1,5 @@
 <template>
-  <div class="time">
+  <div class="box">
     <el-time-select v-model="valueA" placeholder="请选择时间" />
     <el-time-picker
       v-model="valueB"

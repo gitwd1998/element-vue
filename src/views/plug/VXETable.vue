@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <p>VXETable: 表格插件</p>
     <p>
       xe-utils: 提供了一套实用的基础函数, 任意格式的日期转换函数,

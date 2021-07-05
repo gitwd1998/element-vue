@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <el-table :data="tableData" stripe>
       <el-table-column label="序号" width="80" align="center" type="index" />
       <el-table-column prop="date" label="日期" width="180" sortable />

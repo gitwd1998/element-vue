@@ -1,3 +1,5 @@
+import store from "../store";
+import router from "../router";
 import axios from 'axios'
 import { Message } from "element-ui";
 // axios.defaults.withCredentials = true;//配合后端拿到cookie中的值（打包后放到服务器上则不需要）
@@ -16,7 +18,7 @@ service.interceptors.request.use((request) => {
     request.headers['Authorization'] = localStorage.getItem('token')
     let { url, headers } = request
     // 白名单, 不需要进行验证token的api
-    var urlArr = ['/captcha', '/login', '/regest']
+    var urlArr = ['/captcha', '/login', '/regist']
     if (urlArr.includes(url)) return Promise.resolve(request)
     const token = headers.Authorization
     if (!token) Message.error("前端拦截: 没有获取到token")
@@ -31,6 +33,16 @@ service.interceptors.request.use((request) => {
 service.interceptors.response.use((response) => {
     let { data } = response
     if (Number(data.code) === 401) Message.error(data.msg)
+    if (data.name === "TokenExpiredError") {
+        Message.error("token已过期! 请重新登录")
+        localStorage.clear();
+        store.commit("setUser", "");
+        store.commit("setPass", "");
+        store.commit("setToken", "");
+        store.commit("setPhone", "");
+        store.commit("setTimestamp", "");
+        router.push({ path: "/login", name: "login", query: { type: 1 } })
+    }
     return Promise.resolve(response);
 }, (error) => {
     Message.error(`response-err: ${error}`)

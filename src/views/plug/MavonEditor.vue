@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <mavon-editor
       v-model="markdown"
       :toolbars="toolbars"

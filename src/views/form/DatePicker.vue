@@ -1,5 +1,5 @@
 <template>
-  <div class="date">
+  <div class="box">
     <el-date-picker
       v-model="valueA"
       type="date"

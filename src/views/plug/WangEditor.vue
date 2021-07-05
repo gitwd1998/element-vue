@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <el-button size="mini" @click="handleLogHTML">输出HTML</el-button>
     <el-button size="mini" @click="handleLogTEXT">输出TEXT</el-button>
     <el-button size="mini" @click="handleLogJSON">输出JSON</el-button>
