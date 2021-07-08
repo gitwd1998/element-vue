@@ -12,19 +12,16 @@ export function getDomHeight(className) {
 /**
  * @desc 格式化时间戳
  * @param {Number} timeStamp 时间戳
- * @returns 
+ * @returns
  */
 export function dealTime(timeStamp) {
-    let date = new Date(timeStamp);
-    return (
-        date.getFullYear() +
-        "-" +
-        (date.getMonth() > 8
-            ? date.getMonth() + 1
-            : "0" + (date.getMonth() + 1)) +
-        "-" +
-        (date.getDate() > 9 ? date.getDate() : "0" + date.getDate())
-    );
+    const date = new Date(timeStamp);
+    let Y = date.getFullYear()
+    let M = date.getMonth()
+    M = (M > 8 ? M + 1 : "0" + (M + 1))
+    let D = date.getDate()
+    D = (D > 9 ? D : "0" + D)
+    return Y + "-" + M + "-" + D;
 }
 /**
  * 获取cookie
@@ -41,4 +38,14 @@ export function gitCookie(key) {
     console.log(cookies)
     let temp = (cookies.find(v => v[key]) || {})[key];
     return temp || '';
+}
+/**
+ * 获取地址栏参数
+ * @param {String} key search集合中的指定key值
+ * @returns 
+ */
+export function getUrlParam(key) {
+    let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+    let r = decodeURI(window.location.search).substr(1).match(reg);
+    return r && unescape(r[2]);
 }
