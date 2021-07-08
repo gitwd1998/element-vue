@@ -69,12 +69,42 @@
     <li>给登陆注册加过度效果</li>
     <li>用xlsx导出一个表格</li>
     <li>备注: 为什么给box加上绝对定位, 他的宽度就变了</li>
+    <li>
+      <icon><Icon-Box /></icon>
+      <icon><Icon-Calendar /></icon>
+      <icon><Icon-Envelope /></icon>
+      <icon><Icon-Garbage /></icon>
+      <icon><Icon-Image /></icon>
+      <icon><Icon-Moon /></icon>
+      <icon><Icon-Write /></icon>
+    </li>
   </ul>
 </template>
 <script>
+let icons = require.context("@/icons/components", false, /\.vue$/);
+console.log(icons.keys().map((v) => v.match(/^\.\/(.+)\.vue$/)[1]));
+console.log(icons.id);
+import Icon from "@/icons";
+import IconBox from "@/icons/components/IconBox";
+import IconCalendar from "@/icons/components/IconCalendar";
+import IconEnvelope from "@/icons/components/IconEnvelope";
+import IconGarbage from "@/icons/components/IconGarbage";
+import IconImage from "@/icons/components/IconImage";
+import IconMoon from "@/icons/components/IconMoon";
+import IconWrite from "@/icons/components/IconWrite";
+
 import vuex, { createNamespacedHelpers } from "vuex";
 console.log(vuex, createNamespacedHelpers());
 export default {
-  methods: {},
+  components: {
+    Icon,
+    IconBox,
+    IconCalendar,
+    IconEnvelope,
+    IconGarbage,
+    IconImage,
+    IconMoon,
+    IconWrite,
+  },
 };
 </script>
