@@ -269,7 +269,7 @@
         "disabled": false,
         "item": [
             {
-                "title": "走马灯",
+                "title": "日历",
                 "name": "Calendar",
                 "index": "/calendar",
                 "disabled": false,
