@@ -1,8 +1,5 @@
 <template>
   <ul>
-    <li>git diff</li>
-    <li>git log</li>
-    <li>git reflog</li>
     <li>git指令查看当前状态：git status</li>
     <li>git指令创建分支：git branch 分支名</li>
     <li>git指令切换分支：git checkout 分支名</li>

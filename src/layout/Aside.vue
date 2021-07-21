@@ -82,6 +82,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+// 解决侧边导航展开收缩突兀
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 260px;
   // height: 500px;

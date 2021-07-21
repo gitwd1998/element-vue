@@ -9,13 +9,7 @@
               key="login"
               v-if="!isLogin"
               type="primary"
-              @click="
-                $router.push({
-                  path: '/login',
-                  name: 'login',
-                  query: { type: 1 },
-                })
-              "
+              @click="toggleType(1)"
               >{{ $t("login") }}
               <i class="el-icon-d-arrow-right" />
             </el-button>
@@ -24,13 +18,7 @@
               key="regist"
               v-if="isLogin"
               type="info"
-              @click="
-                $router.push({
-                  path: '/login',
-                  name: 'login',
-                  query: { type: 0 },
-                })
-              "
+              @click="toggleType(0)"
               >{{ $t("register") }}
               <i class="el-icon-d-arrow-right" />
             </el-button>
@@ -167,6 +155,13 @@ export default {
       let { data } = await captcha();
       this.captchaImg = data;
     },
+    toggleType(type) {
+      this.$router.push({
+        path: "/login",
+        name: "login",
+        query: { type },
+      });
+    },
     goBack() {
       this.$router.push({ path: "/info", name: "info" });
     },
@@ -218,7 +213,6 @@ export default {
           this.$refs.form.resetFields();
           if (Number(data.code) === 0) {
             Message.success(data.msg);
-            //TODO: 跳转后地址栏参数变了但页面没有更新
             this.$router.push({
               path: "/login",
               name: "login",

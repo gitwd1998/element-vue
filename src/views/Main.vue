@@ -49,6 +49,13 @@ export default {
 <style lang="less">
 .app {
   height: 100%;
+  .el-main {
+    position: relative;
+    overflow-x: hidden;
+    .box {
+      position: absolute;
+    }
+  }
   .el-footer {
     text-align: center;
     font: lighter 12px/60px "youyuan";
@@ -72,16 +79,6 @@ export default {
   .page-leave-to {
     transform: translateX(-100px);
     opacity: 0;
-  }
-}
-</style>
-<style lang="less">
-.app {
-  .el-main {
-    position: relative;
-    .box {
-      position: absolute;
-    }
   }
 }
 </style>
