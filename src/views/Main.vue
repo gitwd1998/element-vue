@@ -54,6 +54,9 @@ export default {
     overflow-x: hidden;
     .box {
       position: absolute;
+      left: 20px;
+      right: 20px;
+      top: 20px;
     }
   }
   .el-footer {
@@ -61,7 +64,7 @@ export default {
     font: lighter 12px/60px "youyuan";
   }
   .page-enter {
-    transform: translateX(100px);
+    transform: translate(100px, -100px);
     opacity: 0;
   }
   .page-enter-active {
@@ -77,7 +80,7 @@ export default {
     transition: all 0.5s;
   }
   .page-leave-to {
-    transform: translateX(-100px);
+    transform: translate(-100px, 100px);
     opacity: 0;
   }
 }
