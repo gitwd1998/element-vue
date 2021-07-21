@@ -7,6 +7,11 @@ import i18n from './i18n'
 
 Vue.config.productionTip = false
 
+
+// 封装全局插件
+import Customize from "./components/customize";
+Vue.use(Customize)
+
 new Vue({
   router,
   store,

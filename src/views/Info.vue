@@ -75,6 +75,11 @@
       <icon><Icon-Moon /></icon>
       <icon><Icon-Write /></icon>
     </li>
+    <li>
+      <one-component />
+      <two-component />
+      <three-component />
+    </li>
   </ul>
 </template>
 <script>
