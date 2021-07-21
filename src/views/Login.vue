@@ -197,6 +197,7 @@ export default {
             this.$router.push({ path: "/", name: "main" });
           } else {
             Message.error(data.msg);
+            this.getCaptcha();
           }
         } else {
           for (let rule in rules) {
