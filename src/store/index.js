@@ -13,43 +13,43 @@ export default new Vuex.Store({
     lang: localStorage.getItem("lang") || 'zh',
   },
   getters: {
-    getUser(status) {
-      return status.user
+    getUser(state) {
+      return state.user
     },
-    getPass(status) {
-      return status.pass
+    getPass(state) {
+      return state.pass
     },
-    getPhone(status) {
-      return status.phone
+    getPhone(state) {
+      return state.phone
     },
-    getToken(status) {
-      return status.token
+    getToken(state) {
+      return state.token
     },
-    getTimestamp(status) {
-      return status.timestamp
+    getTimestamp(state) {
+      return state.timestamp
     },
-    getLang(status) {
-      return status.lang
+    getLang(state) {
+      return state.lang
     },
   },
   mutations: {
-    setUser(status, user) {
-      status.user = user
+    setUser(state, user) {
+      state.user = user
     },
-    setPass(status, pass) {
-      status.pass = pass
+    setPass(state, pass) {
+      state.pass = pass
     },
-    setPhone(status, phone) {
-      status.phone = phone
+    setPhone(state, phone) {
+      state.phone = phone
     },
-    setToken(status, token) {
-      status.token = token
+    setToken(state, token) {
+      state.token = token
     },
-    setTimestamp(status, timestamp) {
-      status.timestamp = timestamp
+    setTimestamp(state, timestamp) {
+      state.timestamp = timestamp
     },
-    setLang(status, lang) {
-      status.timestamp = lang
+    setLang(state, lang) {
+      state.timestamp = lang
     },
   },
   actions: {

@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      lang: "lang",
+      lang: "lang", // ?????? 啥意思
     };
   },
   computed: {
