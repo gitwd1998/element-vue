@@ -26,12 +26,16 @@
       <el-menu-item index="en">{{ $t("lang.en") }}</el-menu-item>
     </el-submenu>
     <el-submenu index="user">
-      <template slot="title">{{ user || $t("user") }}</template>
-      <el-menu-item v-if="!user" index="login">{{ $t("login") }}</el-menu-item>
-      <el-menu-item v-if="!user" index="regist">{{
+      <template slot="title">{{ username || $t("user") }}</template>
+      <el-menu-item v-if="!username" index="login">{{
+        $t("login")
+      }}</el-menu-item>
+      <el-menu-item v-if="!username" index="regist">{{
         $t("register")
       }}</el-menu-item>
-      <el-menu-item v-if="user" index="exit">{{ $t("exit") }}</el-menu-item>
+      <el-menu-item v-if="username" index="logout">{{
+        $t("logout")
+      }}</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>
@@ -51,49 +55,39 @@ export default {
     elSubmenu: Submenu,
     elImage: Image,
   },
-  data() {
-    return {
-      lang: "lang", // ?????? 啥意思
-    };
-  },
+
   computed: {
-    user() {
-      return this.$store.getters.getUser;
+    username() {
+      return this.$store.getters.getUserName;
     },
   },
   methods: {
-    handleSelect(key) {
-      if (key === "zh") {
+    handleSelect(key, keyPath) {
+      if (keyPath[0] === "lang") {
         this.$i18n.locale = key;
-        this.lang = key;
         localStorage.setItem("lang", key);
-      } else if (key === "en") {
-        this.$i18n.locale = key;
-        this.lang = key;
-        localStorage.setItem("lang", key);
-      } else if (key === "login") {
-        this.$router.push({ path: "login", name: "login", query: { type: 1 } });
-      } else if (key === "regist") {
-        this.$router.push({ path: "login", name: "login", query: { type: 0 } });
-      } else if (key === "exit") {
-        MessageBox.confirm("确定退出登录吗？", "提示", {
-          type: "info",
-        })
-          .then(() => {
-            Message.success("已退出当前用户");
-            localStorage.clear();
-            this.$store.commit("setUser", "");
-            this.$store.commit("setPass", "");
-            this.$store.commit("setToken", "");
-            this.$store.commit("setPhone", "");
-            this.$store.commit("setTimestamp", "");
-            this.$router.push({
-              path: "login",
-              name: "login",
-              query: { type: 1 },
-            });
+      } else if (keyPath[0] === "user") {
+        if (key === "login" || key === "regist") {
+          this.$router.push({
+            path: "login",
+            name: "login",
+            query: { type: Number(key === "login") },
+          });
+        } else if (key === "logout") {
+          MessageBox.confirm("确定退出登录吗？", "提示", {
+            type: "info",
           })
-          .catch(() => {});
+            .then(() => {
+              Message.success("已退出当前用户");
+              localStorage.removeItem("token");
+              this.$store.commit("logout");
+              this.$router.push({
+                path: "info",
+                name: "info",
+              });
+            })
+            .catch(() => {});
+        }
       }
     },
   },

@@ -26,31 +26,35 @@
         </el-form-item>
         <el-form-item
           :label="$t('username')"
-          prop="user"
+          prop="username"
           :rules="[
             { required: true, message: $t('rules.username'), trigger: 'blur' },
           ]"
         >
-          <el-input v-model.trim="form.user" />
+          <el-input v-model.trim="form.username" />
         </el-form-item>
         <el-form-item
           v-if="!isLogin"
-          :label="$t('phone')"
-          prop="phone"
+          :label="$t('phonenumber')"
+          prop="phonenumber"
           :rules="[
-            { required: true, message: $t('rules.phone'), trigger: 'blur' },
+            {
+              required: true,
+              message: $t('rules.phonenumber'),
+              trigger: 'blur',
+            },
           ]"
         >
-          <el-input v-model.trim="form.phone" />
+          <el-input v-model.trim="form.phonenumber" />
         </el-form-item>
         <el-form-item
           :label="$t('password')"
-          prop="pass"
+          prop="password"
           :rules="[
             { required: true, message: $t('rules.password'), trigger: 'blur' },
           ]"
         >
-          <el-input v-model.trim="form.pass" />
+          <el-input v-model.trim="form.password" />
         </el-form-item>
         <el-form-item
           v-if="isLogin"
@@ -96,7 +100,7 @@
   </el-row>
 </template>
 <script>
-import { captcha, login, regist } from "@/api";
+import { captcha, login, regist, getUserInfo } from "@/api";
 import {
   Form,
   FormItem,
@@ -123,11 +127,11 @@ export default {
       isLogin: !!Number(this.$route.query.type),
       labelWidth: "100px",
       form: {
-        user: "",
-        pass: "",
-        phone: "",
+        username: "",
+        password: "",
+        phonenumber: "",
         captchatext: "",
-        remember: false,
+        remember: true,
       },
       captchaImg: "",
     };
@@ -152,18 +156,22 @@ export default {
   },
   methods: {
     async getCaptcha() {
-      let { data } = await captcha();
-      this.captchaImg = data;
+      let data = await captcha();
+      if (data.code === "0") {
+        this.captchaImg = data.data;
+      } else {
+        Message.error(data.msg || "获取验证码失败");
+      }
     },
     toggleType(type) {
-      this.$router.push({
+      this.$router.replace({
         path: "/login",
         name: "login",
         query: { type },
       });
     },
     goBack() {
-      this.$router.push({ path: "/info", name: "info" });
+      this.$router.go(-1);
     },
     handleReset() {
       MessageBox.confirm("是否重置？", "提示", {
@@ -179,20 +187,23 @@ export default {
     handleLogin() {
       this.$refs.form.validate(async (valid, rules) => {
         if (valid) {
-          let { data } = await login(this.form);
+          let data = await login(this.form);
           this.$refs.form.resetFields();
-          if (Number(data.code) === 0) {
-            let { user, pass, phone, timestamp, token } = data;
-            localStorage.setItem("user", user);
-            localStorage.setItem("pass", pass);
-            localStorage.setItem("token", token);
-            localStorage.setItem("phone", phone);
-            localStorage.setItem("timestamp", timestamp);
-            this.$store.commit("setUser", user);
-            this.$store.commit("setPass", pass);
-            this.$store.commit("setToken", token);
-            this.$store.commit("setPhone", phone);
-            this.$store.commit("setTimestamp", timestamp);
+          if (data.code === "0") {
+            localStorage.setItem("token", data.data);
+            this.$store.commit("setToken", data.data);
+            getUserInfo({ token: data.data }).then((res) => {
+              if (res.code === "0") {
+                this.$store.commit("setUserName", res.data.username);
+                this.$store.commit("setPhoneNumber", res.data.phonenumber);
+                this.$store.commit("setAvatar", res.data.avatar);
+              } else {
+                Message.error(res.msg || `${res.name}: ${res.message}`);
+                localStorage.removeItem("token");
+                this.$store.commit("setToken", "");
+                this.$router.replace({ path: "/login" });
+              }
+            });
             Message.success(data.msg);
             this.$router.push({ path: "/", name: "main" });
           } else {
@@ -210,9 +221,9 @@ export default {
     handleRegist() {
       this.$refs.form.validate(async (valid, rules) => {
         if (valid) {
-          let { data } = await regist(this.form);
+          let data = await regist(this.form);
           this.$refs.form.resetFields();
-          if (Number(data.code) === 0) {
+          if (data.code === "0") {
             Message.success(data.msg);
             this.$router.push({
               path: "/login",
