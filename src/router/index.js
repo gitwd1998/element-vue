@@ -4,6 +4,7 @@ import Info from '@/views/Info'
 import store from '../store'
 // const Info = r => require.ensure([], () => r(require('@/views/Info.vue')), 'Info')// 同上
 import { Message } from "element-ui";
+import { getUserInfo } from '@/api'
 Vue.use(VueRouter)
 
 const routes = [
@@ -69,9 +70,22 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     if (token) {
-      next()
+      console.log(token);
+      getUserInfo({ token }).then((res) => {
+        if (res.code === "0") {
+          store.commit("setUserName", res.data.username);
+          store.commit("setPhoneNumber", res.data.phonenumber);
+          store.commit("setAvatar", res.data.avatar);
+          next()
+        } else {
+          Message.error(res.msg || `${res.name}: ${res.message}`);
+          localStorage.removeItem("token");
+          store.commit("setToken", "");
+          next({ path: "/login", name: "login", query: { type: 1 } })
+        }
+      });
     } else {
-      Message.error("无权访问该页面, 请登录后访问")
+      Message.error("获取token失败, 请登录后访问")
       next({ path: "/login", name: "login", query: { type: 1 } })
     }
   }
