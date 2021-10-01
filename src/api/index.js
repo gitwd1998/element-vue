@@ -1,4 +1,18 @@
 import request from '@/utils/request'
+
+/**
+ * 获取用户信息
+ * @param {*} data 
+ * @returns 获取用户信息
+ */
+export function getUserInfo(data) {
+	return request({
+		method: 'post',
+		url: '/getUserInfo',
+		data,
+	})
+}
+
 // 验证码
 export function captcha() {
 	return request({
