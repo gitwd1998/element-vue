@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    :default-active="$route.path"
+    :default-active="$route.path.match(/(\/[^\/]*)+?/g)[0]"
     router
     unique-opened
     :collapse="collapse"
