@@ -5,52 +5,51 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: localStorage.getItem("user"),
-    pass: localStorage.getItem("pass"),
-    phone: localStorage.getItem("phone"),
     token: localStorage.getItem("token"),
-    timestamp: localStorage.getItem("timestamp"),
     lang: localStorage.getItem("lang") || 'zh',
+    username: '',
+    phonenumber: '',
+    avatar: ''
   },
   getters: {
-    getUser(state) {
-      return state.user
+    getUserName(state) {
+      return state.username
     },
-    getPass(state) {
-      return state.pass
-    },
-    getPhone(state) {
-      return state.phone
+    getPhoneNumber(state) {
+      return state.phonenumber
     },
     getToken(state) {
       return state.token
     },
-    getTimestamp(state) {
-      return state.timestamp
-    },
     getLang(state) {
       return state.lang
     },
+    getAvatar(state) {
+      return state.avatar
+    }
   },
   mutations: {
-    setUser(state, user) {
-      state.user = user
+    setUserName(state, username) {
+      state.username = username
     },
-    setPass(state, pass) {
-      state.pass = pass
-    },
-    setPhone(state, phone) {
-      state.phone = phone
+    setPhoneNumber(state, phonenumber) {
+      state.phonenumber = phonenumber
     },
     setToken(state, token) {
       state.token = token
     },
-    setTimestamp(state, timestamp) {
-      state.timestamp = timestamp
-    },
     setLang(state, lang) {
       state.timestamp = lang
     },
+    setAvatar(state, avatar) {
+      state.avatar = avatar
+    },
+    logout(state) {
+      state.token = ""
+      state.username = ""
+      state.phonenumber = ""
+      state.avatar = ""
+    }
   },
   actions: {
   },
