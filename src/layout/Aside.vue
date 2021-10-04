@@ -1,53 +1,13 @@
 <template>
   <el-menu
-    :default-active="$route.path.match(/(\/[^\/]*)+?/g)[0]"
+    :default-active="$route.path.match(/(\/[^\/]*)+?/g)[0] || ''"
     router
     unique-opened
     :collapse="collapse"
     class="el-menu-vertical-demo"
   >
     <template v-for="nav in navList">
-      <el-submenu
-        v-if="nav.item.length"
-        :index="nav.index"
-        :key="nav.index"
-        :disabled="nav.disabled"
-      >
-        <template slot="title">
-          <i :class="nav.icon" /><span>{{ nav.title }} {{ nav.name }}</span>
-        </template>
-        <template v-for="item in nav.item">
-          <el-submenu
-            v-if="item.item.length"
-            :key="item.index"
-            :index="item.index"
-            :disabled="item.disabled"
-          >
-            <template slot="title">
-              <i :class="item.icon" />
-              <span>{{ item.title }} {{ item.name }}</span>
-            </template>
-            <el-menu-item
-              v-for="iItem in item.item"
-              :key="iItem.index"
-              :index="iItem.index"
-              :disabled="iItem.disabled"
-            >
-              <i :class="iItem.icon"></i>
-              <span>{{ iItem.title }} {{ iItem.name }}</span>
-            </el-menu-item>
-          </el-submenu>
-          <el-menu-item
-            v-else
-            :key="item.index"
-            :index="item.index"
-            :disabled="item.disabled"
-          >
-            <i :class="item.icon"></i>
-            <span>{{ item.title }} {{ item.name }}</span>
-          </el-menu-item>
-        </template>
-      </el-submenu>
+      <BaseMenu v-if="nav.item.length" :key="nav.index" :menuData="nav" />
       <el-menu-item
         v-else
         :key="nav.index"
@@ -55,7 +15,7 @@
         :disabled="nav.disabled"
       >
         <i :class="nav.icon"></i>
-        <span>{{ nav.title }} {{ nav.name }}</span>
+        <span>{{ nav.title + " " + nav.name }}</span>
       </el-menu-item>
     </template>
     <li class="el-menu-item right" @click="handleCollapse">
@@ -66,8 +26,53 @@
 <script>
 import { Menu, MenuItem, Submenu } from "element-ui";
 import navList from "@/assets/json/navList.json";
+const BaseMenu = {
+  props: {
+    menuData: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  components: {
+    elSubmenu: Submenu,
+    elMenuItem: MenuItem,
+  },
+  render() {
+    const { menuData } = this;
+    return (
+      <el-submenu
+        index={menuData.index}
+        key={menuData.index}
+        disabled={menuData.disabled}
+      >
+        <template slot="title">
+          <i class={menuData.icon} />
+          <span>{menuData.title + " " + menuData.name}</span>
+        </template>
+        {menuData.item.map((item) =>
+          item.item.length ? (
+            <BaseMenu menuData={item} />
+          ) : (
+            <el-menu-item
+              key={item.index}
+              index={item.index}
+              disabled={item.disabled}
+            >
+              <i class={item.icon} />
+              <span>{item.title + " " + item.name}</span>
+            </el-menu-item>
+          )
+        )}
+      </el-submenu>
+    );
+  },
+};
 export default {
-  components: { elMenu: Menu, elSubmenu: Submenu, elMenuItem: MenuItem },
+  components: {
+    elMenu: Menu,
+    elMenuItem: MenuItem,
+    BaseMenu,
+  },
   data() {
     return {
       collapse: false,
