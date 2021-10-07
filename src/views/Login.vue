@@ -2,7 +2,7 @@
   <el-row>
     <el-col :span="12" :push="6">
       <el-form ref="form" :model="form" :label-width="labelWidth">
-        <el-form-item class="relative-fornItem">
+        <el-form-item class="relative-formItem">
           <transition mode="out-in" name="btn">
             <el-button
               class="absolute-btn"
@@ -125,7 +125,7 @@ export default {
   data() {
     return {
       isLogin: !!Number(this.$route.query.type),
-      labelWidth: "100px",
+      labelWidth: "auto",
       form: {
         username: "",
         password: "",
@@ -245,7 +245,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.relative-fornItem {
+.relative-formItem {
   position: relative;
   height: 40px;
   margin: 22px 0;
