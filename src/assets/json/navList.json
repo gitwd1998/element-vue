@@ -286,29 +286,36 @@
     "item": [
       {
         "title": "wangeditor",
-        "name": "Wangeditor",
+        "name": "",
         "index": "/wangEditor",
         "disabled": false,
         "item": []
       },
       {
         "title": "mavon-editor",
-        "name": "MavonEditor",
+        "name": "",
         "index": "/mavonEditor",
         "disabled": false,
         "item": []
       },
       {
         "title": "vxe-table",
-        "name": "VxeTable",
+        "name": "",
         "index": "/vxeTable",
         "disabled": false,
         "item": []
       },
       {
         "title": "vue-pdf",
-        "name": "VuePdf",
+        "name": "",
         "index": "/pdf",
+        "disabled": false,
+        "item": []
+      },
+      {
+        "title": "draggable",
+        "name": "",
+        "index": "/draggable",
         "disabled": false,
         "item": []
       }

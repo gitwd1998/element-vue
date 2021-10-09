@@ -38,6 +38,7 @@ const routes = [
       { path: '/mavonEditor', name: 'mavonEditor', component: () => import('@/views/plug/MavonEditor') },
       { path: '/vxeTable', name: 'vxeTable', component: () => import('@/views/plug/VXETable') },
       { path: '/pdf', name: 'pdf', component: () => import('@/views/plug/PDF') },
+      { path: '/draggable', name: 'draggable', component: () => import('@/views/plug/Draggable') },
     ]
   },
   // error
@@ -70,7 +71,6 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     if (token) {
-      console.log(token);
       getUserInfo({ token }).then((res) => {
         if (res.code === "0") {
           store.commit("setUserName", res.data.username);
