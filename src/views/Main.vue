@@ -86,18 +86,22 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .app {
   height: 100%;
   background: #ffffff;
   .el-main {
-    padding: 20px 0;
-    .el-scrollbar__view {
-      position: relative;
-      .box {
-        position: absolute;
-        left: 20px;
-        right: 20px;
+    padding: 0;
+    .el-scrollbar {
+      .el-scrollbar__wrap {
+        .el-scrollbar__view {
+          // position: relative;
+          margin: 20px;
+          .box {
+            // position: absolute;
+            width: 100%;
+          }
+        }
       }
     }
   }
