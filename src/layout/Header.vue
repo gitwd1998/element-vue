@@ -1,43 +1,46 @@
 <template>
-  <el-menu mode="horizontal" @select="handleSelect">
-    <el-menu-item>
+  <div class="header">
+    <div class="logo">
       <el-image :src="require('@/assets/img/element-ui.svg')" />
-    </el-menu-item>
-    <el-menu-item index="1">处理中心</el-menu-item>
-    <el-submenu index="2">
-      <template slot="title">我的工作台</template>
-      <el-menu-item index="2-1">选项1</el-menu-item>
-      <el-menu-item index="2-2">选项2</el-menu-item>
-      <el-menu-item index="2-3">选项3</el-menu-item>
-      <el-submenu index="2-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="2-4-1">选项1</el-menu-item>
-        <el-menu-item index="2-4-2">选项2</el-menu-item>
-        <el-menu-item index="2-4-3">选项3</el-menu-item>
+    </div>
+    <el-menu mode="horizontal" @select="handleSelect">
+      <el-menu-item index="1">处理中心</el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">我的工作台</template>
+        <el-menu-item index="2-1">选项1</el-menu-item>
+        <el-menu-item index="2-2">选项2</el-menu-item>
+        <el-menu-item index="2-3">选项3</el-menu-item>
+        <el-submenu index="2-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="2-4-1">选项1</el-menu-item>
+          <el-menu-item index="2-4-2">选项2</el-menu-item>
+          <el-menu-item index="2-4-3">选项3</el-menu-item>
+        </el-submenu>
       </el-submenu>
-    </el-submenu>
-    <el-menu-item index="3" disabled>带开放</el-menu-item>
-    <el-menu-item index="4">
-      <a href="###" target="_blank">订单管理</a>
-    </el-menu-item>
-    <el-submenu index="lang">
-      <template slot="title">{{ $t("lang.lang") }}</template>
-      <el-menu-item index="zh">{{ $t("lang.zh") }}</el-menu-item>
-      <el-menu-item index="en">{{ $t("lang.en") }}</el-menu-item>
-    </el-submenu>
-    <el-submenu index="user">
-      <template slot="title">{{ username || $t("user") }}</template>
-      <el-menu-item v-if="!username" index="login">{{
-        $t("login")
-      }}</el-menu-item>
-      <el-menu-item v-if="!username" index="regist">{{
-        $t("register")
-      }}</el-menu-item>
-      <el-menu-item v-if="username" index="logout">{{
-        $t("logout")
-      }}</el-menu-item>
-    </el-submenu>
-  </el-menu>
+      <el-menu-item index="3" disabled>带开放</el-menu-item>
+      <el-menu-item index="4">
+        <a href="###" target="_blank">订单管理</a>
+      </el-menu-item>
+      <el-submenu index="lang">
+        <template slot="title">{{ $t("lang.lang") }}</template>
+        <el-menu-item index="zh">{{ $t("lang.zh") }}</el-menu-item>
+        <el-menu-item index="en">{{ $t("lang.en") }}</el-menu-item>
+      </el-submenu>
+      <el-submenu index="user">
+        <template slot="title">{{ username || $t("user") }}</template>
+        <el-menu-item v-if="!username" index="login">{{
+          $t("login")
+        }}</el-menu-item>
+        <el-menu-item v-if="!username" index="regist">{{
+          $t("register")
+        }}</el-menu-item>
+        <el-menu-item v-if="username" index="logout">{{
+          $t("logout")
+        }}</el-menu-item>
+      </el-submenu>
+      <el-menu-item>头像</el-menu-item>
+    </el-menu>
+  </div>
 </template>
 <script>
 import {
@@ -94,7 +97,14 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.el-image {
-  height: 100%;
+.header {
+  display: flex;
+  justify-content: space-between;
+  .logo {
+    margin: auto 30px;
+  }
+  .el-menu {
+    border: none;
+  }
 }
 </style>

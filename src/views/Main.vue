@@ -111,9 +111,12 @@ export default {
       overflow-x: hidden;
     }
   }
+  .el-header {
+    box-shadow: #e6e6e6 0 0 6px;
+  }
   .el-footer {
     text-align: center;
-    background: radial-gradient(#fff, #eee, #fff);
+    box-shadow: #e6e6e6 0 0 6px;
     font: lighter 12px/60px "youyuan";
   }
   .page-enter {
