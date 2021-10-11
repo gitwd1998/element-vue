@@ -24,7 +24,7 @@
         "title": "色彩",
         "name": "Color",
         "index": "/color",
-        "disabled": false,
+        "disabled": true,
         "item": []
       },
       {

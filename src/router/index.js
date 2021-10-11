@@ -19,7 +19,6 @@ const routes = [
       // basic
       { path: '/button', name: 'button', component: () => import('@/views/basic/Button') },
       { path: '/layout', name: 'layout', component: () => import('@/views/basic/Layout') },
-      { path: '/color', name: 'color', component: () => import('@/views/basic/Color') },
       // data
       { path: '/table', name: 'table', component: () => import('@/views/data/Table') },
       // form
