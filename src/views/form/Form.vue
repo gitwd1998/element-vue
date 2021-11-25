@@ -251,7 +251,6 @@ import {
   Message,
   InputNumber,
 } from "element-ui";
-import { upload } from "@/api";
 export default {
   components: {
     elForm: Form,
@@ -310,7 +309,6 @@ export default {
         textarea: "",
         table: [{ name: "", sex: "", age: 10 }],
         fileList: [],
-        upload: null,
         domains: [{ value: "" }],
       },
       rules: {
@@ -332,7 +330,6 @@ export default {
         checkbox: [{ required: true, message: "请选择", trigger: "change" }],
         radio: [{ required: true, message: "请选择", trigger: "change" }],
         textarea: [{ required: true, message: "请输入", trigger: "blur" }],
-        upload: [{ required: true, message: "请输入", trigger: "blur" }],
         fileList: [
           { required: true, message: "请选择文件", trigger: "change" },
         ],
@@ -377,12 +374,6 @@ export default {
     handleSubmit() {
       this.$refs.form.validate(async (valid, rules) => {
         if (valid) {
-          this.formData.upload = new FormData();
-          this.formData.fileList.forEach((v) => {
-            this.formData.upload.append(v.name, v.raw);
-          });
-          let { data } = await upload(this.formData.upload);
-          if (Number(data.code) === 0) this.formData.fileList = data.data;
           console.log(this.formData);
         } else {
           console.warn(this.formData, valid, rules);
