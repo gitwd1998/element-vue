@@ -6,7 +6,6 @@
       ref="form"
       :label-position="labelPosition"
       label-width="120px"
-      status-icon
     >
       <el-form-item label="标题对齐方式">
         <el-radio-group v-model="labelPosition">
@@ -38,7 +37,6 @@
         <el-col :span="11">
           <el-form-item prop="date">
             <el-date-picker
-              clearable
               :editable="false"
               type="date"
               v-model="formData.date"
@@ -53,7 +51,6 @@
         <el-col :span="11">
           <el-form-item prop="time">
             <el-time-picker
-              clearable
               :editable="false"
               v-model="formData.time"
               format="hh:mm:ss"
@@ -68,7 +65,6 @@
         <el-col :span="11">
           <el-form-item prop="start">
             <el-date-picker
-              clearable
               :editable="false"
               type="date"
               v-model="formData.start"
@@ -83,7 +79,6 @@
         <el-col :span="11">
           <el-form-item prop="end">
             <el-date-picker
-              clearable
               :editable="false"
               type="date"
               v-model="formData.end"
@@ -158,7 +153,7 @@
                 :prop="'table.' + scope.$index + '.' + 'name'"
                 :rules="rules.name"
               >
-                <el-input v-model="scope.row.name" />
+                <el-input v-model="scope.row.name" clearable />
               </el-form-item>
             </template>
           </el-table-column>
@@ -168,7 +163,7 @@
                 :prop="'table.' + scope.$index + '.' + 'sex'"
                 :rules="rules.sex"
               >
-                <el-input v-model="scope.row.sex" />
+                <el-input v-model="scope.row.sex" clearable />
               </el-form-item>
             </template>
           </el-table-column>
@@ -214,7 +209,7 @@
         :prop="'domains.' + i + '.value'"
         :rules="rules.domain"
       >
-        <el-input v-model="domain.value">
+        <el-input v-model="domain.value" clearable>
           <template slot="append">
             <el-button @click="handleDeleteDomain(i)">删除</el-button>
           </template>
