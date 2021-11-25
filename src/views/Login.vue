@@ -6,20 +6,20 @@
           <transition mode="out-in" name="btn">
             <el-button
               class="absolute-btn"
-              key="login"
-              v-if="!isLogin"
-              type="primary"
-              @click="toggleType(1)"
-              >{{ $t("login") }}
-              <i class="el-icon-d-arrow-right" />
-            </el-button>
-            <el-button
-              class="absolute-btn"
               key="regist"
               v-if="isLogin"
               type="info"
               @click="toggleType(0)"
               >{{ $t("register") }}
+              <i class="el-icon-d-arrow-right" />
+            </el-button>
+            <el-button
+              class="absolute-btn"
+              key="login"
+              v-else
+              type="primary"
+              @click="toggleType(1)"
+              >{{ $t("login") }}
               <i class="el-icon-d-arrow-right" />
             </el-button>
           </transition>
@@ -205,7 +205,7 @@ export default {
               }
             });
             Message.success(data.msg);
-            this.$router.push({ path: "/", name: "main" });
+            this.$router.go(-1);
           } else {
             Message.error(data.msg);
             this.getCaptcha();
@@ -225,7 +225,7 @@ export default {
           this.$refs.form.resetFields();
           if (data.code === "0") {
             Message.success(data.msg);
-            this.$router.push({
+            this.$router.replace({
               path: "/login",
               name: "login",
               query: { type: 1 },
