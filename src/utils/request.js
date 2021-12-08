@@ -1,12 +1,12 @@
-import store from "../store";
-import router from "../router";
+import store from "@/store";
+import router from "@/router";
 import axios from 'axios'
 import { Message } from "element-ui";
 // axios.defaults.withCredentials = true;//配合后端拿到cookie中的值（打包后放到服务器上则不需要）
 console.warn(process.env)
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BAES_URL,
+  baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 3000,
 })
 

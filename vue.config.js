@@ -92,7 +92,7 @@ module.exports = {
         // 域名
         host: '0.0.0.0',
         // 端口号
-        port: '8888',
+        port: '8082',
         // 当为true时浏览器会给出一些警告
         https: false,
         // 热更新
@@ -106,7 +106,7 @@ module.exports = {
         proxy: {
             '/api': {
                 // 接口域名
-                target: process.env.VUE_APP_BAES_URL,
+                target: 'http://127.0.0.1:3000',
                 // 是否跨域
                 changeOrigin: true,
                 ws: true,
